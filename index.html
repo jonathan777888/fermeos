@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ferme OS - Field Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">La ferme de l'avenir</p>
+      <h1>Ferme OS</h1>
+      <p class="subtitle">Tableau de bord terrain pour observations, tâches, qualité et équipe.</p>
+    </div>
+    <button id="seedDemoBtn" class="secondary-btn">Charger données démo</button>
+  </header>
+
+  <nav class="tabs" aria-label="Navigation principale">
+    <button class="tab active" data-view="dashboard">Dashboard</button>
+    <button class="tab" data-view="observations">Observations</button>
+    <button class="tab" data-view="tasks">Tâches</button>
+    <button class="tab" data-view="quality">Qualité</button>
+    <button class="tab" data-view="team">Équipe</button>
+  </nav>
+
+  <main>
+    <section id="dashboard" class="view active-view">
+      <div class="grid cards-grid">
+        <article class="card metric-card">
+          <span class="metric-label">Observations urgentes</span>
+          <strong id="urgentCount">0</strong>
+        </article>
+        <article class="card metric-card">
+          <span class="metric-label">Tâches à faire</span>
+          <strong id="todoCount">0</strong>
+        </article>
+        <article class="card metric-card">
+          <span class="metric-label">Contrôles qualité</span>
+          <strong id="qualityCount">0</strong>
+        </article>
+        <article class="card metric-card">
+          <span class="metric-label">Messages équipe</span>
+          <strong id="postCount">0</strong>
+        </article>
+      </div>
+
+      <div class="grid two-columns">
+        <section class="card">
+          <div class="section-title">
+            <h2>Priorité 1</h2>
+            <span class="pill danger">Terrain</span>
+          </div>
+          <ul id="priorityList" class="item-list"></ul>
+        </section>
+
+        <section class="card">
+          <div class="section-title">
+            <h2>Dernières observations</h2>
+            <span class="pill">Suivi</span>
+          </div>
+          <ul id="recentObservations" class="item-list"></ul>
+        </section>
+      </div>
+    </section>
+
+    <section id="observations" class="view">
+      <div class="grid two-columns">
+        <form id="observationForm" class="card form-card">
+          <h2>Ajouter une observation</h2>
+          <label>Parcelle
+            <select name="parcel" required>
+              <option value="C2">C2</option>
+              <option value="C4">C4</option>
+              <option value="D4">D4</option>
+              <option value="D6">D6</option>
+              <option value="Tunnel">Tunnel</option>
+              <option value="Grand Jardin">Grand Jardin</option>
+              <option value="Mini-serre">Mini-serre</option>
+            </select>
+          </label>
+          <label>Culture
+            <input name="crop" placeholder="Ex: melon d'eau, tomate, ail" required />
+          </label>
+          <label>Type de problème
+            <select name="issue" required>
+              <option value="Ravageur">Ravageur</option>
+              <option value="Maladie">Maladie</option>
+              <option value="Mauvaise herbe">Mauvaise herbe</option>
+              <option value="Stress hydrique">Stress hydrique</option>
+              <option value="Qualité">Qualité</option>
+              <option value="Autre">Autre</option>
+            </select>
+          </label>
+          <label>Gravité
+            <select name="severity" required>
+              <option value="Faible">Faible</option>
+              <option value="Moyen">Moyen</option>
+              <option value="Urgent">Urgent</option>
+            </select>
+          </label>
+          <label>Notes
+            <textarea name="notes" placeholder="Décris ce que tu as observé..." required></textarea>
+          </label>
+          <button type="submit" class="primary-btn">Enregistrer</button>
+        </form>
+
+        <section class="card">
+          <h2>Liste des observations</h2>
+          <ul id="observationList" class="item-list"></ul>
+        </section>
+      </div>
+    </section>
+
+    <section id="tasks" class="view">
+      <div class="grid two-columns">
+        <form id="taskForm" class="card form-card">
+          <h2>Créer une tâche</h2>
+          <label>Titre
+            <input name="title" placeholder="Ex: Reboucher les trous de couverture" required />
+          </label>
+          <label>Responsable
+            <input name="assignee" placeholder="Ex: Jonathan" required />
+          </label>
+          <label>Priorité
+            <select name="priority" required>
+              <option value="Priorité 1">Priorité 1</option>
+              <option value="Priorité 2">Priorité 2</option>
+              <option value="Priorité 3">Priorité 3</option>
+            </select>
+          </label>
+          <label>Statut
+            <select name="status" required>
+              <option value="À faire">À faire</option>
+              <option value="En cours">En cours</option>
+              <option value="Terminé">Terminé</option>
+            </select>
+          </label>
+          <button type="submit" class="primary-btn">Ajouter la tâche</button>
+        </form>
+
+        <section class="card">
+          <h2>Tâches</h2>
+          <ul id="taskList" class="item-list"></ul>
+        </section>
+      </div>
+    </section>
+
+    <section id="quality" class="view">
+      <div class="grid two-columns">
+        <form id="qualityForm" class="card form-card">
+          <h2>Contrôle qualité</h2>
+          <label>Culture
+            <input name="crop" placeholder="Ex: laitue" required />
+          </label>
+          <label>Catégorie
+            <select name="category" required>
+              <option value="Vendable">Vendable</option>
+              <option value="Déclassé">Déclassé</option>
+              <option value="Don">Don</option>
+              <option value="Perte">Perte</option>
+            </select>
+          </label>
+          <label>Quantité
+            <input name="quantity" type="number" min="0" placeholder="Ex: 12" required />
+          </label>
+          <label>Notes
+            <textarea name="notes" placeholder="Ex: feuilles abîmées, calibre trop petit..."></textarea>
+          </label>
+          <button type="submit" class="primary-btn">Enregistrer qualité</button>
+        </form>
+
+        <section class="card">
+          <h2>Historique qualité</h2>
+          <ul id="qualityList" class="item-list"></ul>
+        </section>
+      </div>
+    </section>
+
+    <section id="team" class="view">
+      <div class="grid two-columns">
+        <form id="postForm" class="card form-card">
+          <h2>Message équipe</h2>
+          <label>Auteur
+            <input name="author" placeholder="Ex: Jonathan" required />
+          </label>
+          <label>Message
+            <textarea name="message" placeholder="Ex: Les melons sont bien protégés, seulement reboucher les trous." required></textarea>
+          </label>
+          <button type="submit" class="primary-btn">Publier</button>
+        </form>
+
+        <section class="card">
+          <h2>Fil d'équipe</h2>
+          <ul id="postList" class="item-list"></ul>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Ferme OS MVP - construit pour GitHub Pages, Bubble Challenge et portfolio remote.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
