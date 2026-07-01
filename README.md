@@ -1,18 +1,18 @@
 # Ferme OS - Field Dashboard
 
-Ferme OS est un MVP web simple pour suivre les operations d'une ferme maraichere : observations de champ, taches, controle qualite et messages d'equipe.
+Ferme OS is a simple web MVP for managing vegetable farm operations: field observations, farm tasks, quality control, and team updates.
 
-## Fonctionnalites
+## Features
 
-- Dashboard avec indicateurs rapides
-- Ajout d'observations par parcelle, culture, type de probleme et gravite
-- Creation et suivi des taches terrain
-- Controle qualite : vendable, declasse, don, perte
-- Fil d'equipe pour les messages terrain
-- Donnees sauvegardees dans le navigateur avec localStorage
-- Compatible GitHub Pages
+- Dashboard with quick operational indicators
+- Field observations by parcel, crop, issue type, and severity
+- Task creation and task status tracking
+- Quality control: sellable, downgraded, donation, and loss
+- Team feed for field updates
+- Browser storage with localStorage
+- Compatible with GitHub Pages
 
-## Structure
+## Project structure
 
 ```text
 ferme-os/
@@ -22,30 +22,42 @@ ferme-os/
 └── README.md
 ```
 
-## Lancer localement
+## Run locally
 
-Ouvrir `index.html` dans un navigateur.
+Open `index.html` in a browser.
 
-Ou avec VS Code :
+Or with VS Code:
 
-1. Installer l'extension Live Server
-2. Clic droit sur `index.html`
-3. Choisir `Open with Live Server`
+1. Install the Live Server extension
+2. Right-click `index.html`
+3. Choose `Open with Live Server`
 
-## Publier sur GitHub Pages
+## Publish with GitHub Pages
 
-1. Creer un depot GitHub appele `ferme-os`
-2. Ajouter les fichiers du projet
-3. Aller dans `Settings > Pages`
-4. Choisir `Deploy from a branch`
-5. Branch: `main`, folder: `/root`
-6. Enregistrer
+1. Create or open your GitHub repository
+2. Upload the project files
+3. Go to `Settings > Pages`
+4. Choose `Deploy from a branch`
+5. Branch: `main`, folder: `/root` or `/`
+6. Save
 
-## Prochaines ameliorations
+Your app will be published at a URL similar to:
 
-- Connexion utilisateur
-- Export CSV des observations
-- Ajout de photos terrain
-- Filtres par parcelle et culture
-- Base de donnees Firebase ou Supabase
-- Version Bubble/no-code connectee au meme modele de donnees
+```text
+https://your-github-username.github.io/your-repository-name/
+```
+
+For Jonathan's repository, the likely URL is:
+
+```text
+https://jonathan777888.github.io/fermeos/
+```
+
+## Next improvements
+
+- User login
+- CSV export for observations
+- Field photo uploads
+- Filters by parcel and crop
+- Firebase or Supabase database
+- Bubble/no-code version connected to the same data model

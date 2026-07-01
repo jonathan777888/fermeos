@@ -1,4 +1,4 @@
-const STORAGE_KEY = "fermeOSState";
+const STORAGE_KEY = "fermeOSStateEnglish";
 
 const initialState = {
   observations: [],
@@ -12,72 +12,72 @@ const demoState = {
     {
       id: crypto.randomUUID(),
       parcel: "C4",
-      crop: "Brocoli",
-      issue: "Stress ou maladie",
+      crop: "Broccoli",
+      issue: "Stress or disease",
       severity: "Urgent",
-      notes: "Quelques plants morts. Vérifier l'implantation et les symptômes.",
+      notes: "A few plants died. Check establishment quality and visible symptoms.",
       createdAt: new Date().toISOString()
     },
     {
       id: crypto.randomUUID(),
       parcel: "D6",
-      crop: "Courgette",
-      issue: "Ravageur",
+      crop: "Zucchini",
+      issue: "Pest",
       severity: "Urgent",
-      notes: "Présence de chrysomèle. Prévoir argile double dose.",
+      notes: "Cucumber beetle presence. Plan a double-dose clay treatment.",
       createdAt: new Date().toISOString()
     },
     {
       id: crypto.randomUUID(),
       parcel: "Tunnel",
-      crop: "Tomate",
-      issue: "Suivi",
-      severity: "Faible",
-      notes: "Plants très beaux, zéro problème. Effeuiller, drageonner et mettre les cordes.",
+      crop: "Tomato",
+      issue: "Monitoring",
+      severity: "Low",
+      notes: "Plants look very healthy. Remove lower leaves, prune suckers, and install support strings.",
       createdAt: new Date().toISOString()
     }
   ],
   tasks: [
     {
       id: crypto.randomUUID(),
-      title: "Reboucher les trous de couverture des melons",
+      title: "Patch holes in the watermelon cover",
       assignee: "Jonathan",
-      priority: "Priorité 1",
-      status: "À faire",
+      priority: "Priority 1",
+      status: "To do",
       createdAt: new Date().toISOString()
     },
     {
       id: crypto.randomUUID(),
-      title: "Récolter un peu d'ail quand 3 feuilles sont jaunes",
-      assignee: "Équipe champ",
-      priority: "Priorité 1",
-      status: "En cours",
+      title: "Harvest a small amount of garlic when 3 leaves are yellow",
+      assignee: "Field team",
+      priority: "Priority 1",
+      status: "In progress",
       createdAt: new Date().toISOString()
     },
     {
       id: crypto.randomUUID(),
-      title: "Désherbage dans les choux",
-      assignee: "Équipe légumes",
-      priority: "Priorité 2",
-      status: "À faire",
+      title: "Weed the cabbage beds",
+      assignee: "Vegetable team",
+      priority: "Priority 2",
+      status: "To do",
       createdAt: new Date().toISOString()
     }
   ],
   qualityChecks: [
     {
       id: crypto.randomUUID(),
-      crop: "Laitue",
-      category: "Vendable",
+      crop: "Lettuce",
+      category: "Sellable",
       quantity: 24,
-      notes: "Les laitues vont très bien.",
+      notes: "The lettuce looks very good.",
       createdAt: new Date().toISOString()
     },
     {
       id: crypto.randomUUID(),
-      crop: "Tomate",
-      category: "Vendable",
+      crop: "Tomato",
+      category: "Sellable",
       quantity: 34,
-      notes: "Zéro problème observé.",
+      notes: "No problems observed.",
       createdAt: new Date().toISOString()
     }
   ],
@@ -85,7 +85,7 @@ const demoState = {
     {
       id: crypto.randomUUID(),
       author: "Jonathan",
-      message: "Les melons d'eau sont bien protégés. Pas de chrysomèle ni punaise terne observées.",
+      message: "Watermelons are well protected. No cucumber beetles or tarnished plant bugs were observed.",
       createdAt: new Date().toISOString()
     }
   ]
@@ -95,12 +95,12 @@ let state = loadState();
 
 function loadState() {
   const saved = localStorage.getItem(STORAGE_KEY);
-  if (!saved) return initialState;
+  if (!saved) return { ...initialState };
   try {
     return JSON.parse(saved);
   } catch (error) {
-    console.error("Impossible de lire les données locales", error);
-    return initialState;
+    console.error("Unable to read local data", error);
+    return { ...initialState };
   }
 }
 
@@ -109,7 +109,7 @@ function saveState() {
 }
 
 function formatDate(value) {
-  return new Intl.DateTimeFormat("fr-CA", {
+  return new Intl.DateTimeFormat("en-CA", {
     dateStyle: "medium",
     timeStyle: "short"
   }).format(new Date(value));
@@ -131,20 +131,20 @@ function emptyMessage(text) {
 
 function renderDashboard() {
   const urgentObservations = state.observations.filter((item) => item.severity === "Urgent");
-  const todoTasks = state.tasks.filter((task) => task.status !== "Terminé");
+  const openTasks = state.tasks.filter((task) => task.status !== "Done");
 
   document.getElementById("urgentCount").textContent = urgentObservations.length;
-  document.getElementById("todoCount").textContent = todoTasks.length;
+  document.getElementById("todoCount").textContent = openTasks.length;
   document.getElementById("qualityCount").textContent = state.qualityChecks.length;
   document.getElementById("postCount").textContent = state.posts.length;
 
   const priorities = state.tasks
-    .filter((task) => task.priority === "Priorité 1" && task.status !== "Terminé")
+    .filter((task) => task.priority === "Priority 1" && task.status !== "Done")
     .slice(0, 5);
 
   document.getElementById("priorityList").innerHTML = priorities.length
     ? priorities.map((task) => `<li class="item"><strong>${task.title}</strong>${task.assignee} - ${task.status}<small>${task.priority}</small></li>`).join("")
-    : emptyMessage("Aucune priorité 1 pour le moment.");
+    : emptyMessage("No Priority 1 task right now.");
 
   const recent = [...state.observations]
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
@@ -152,7 +152,7 @@ function renderDashboard() {
 
   document.getElementById("recentObservations").innerHTML = recent.length
     ? recent.map((obs) => `<li class="item"><strong>${obs.parcel} - ${obs.crop}</strong>${obs.issue} · ${obs.severity}<small>${obs.notes}</small></li>`).join("")
-    : emptyMessage("Aucune observation enregistrée.");
+    : emptyMessage("No observation recorded yet.");
 }
 
 function renderObservations() {
@@ -166,7 +166,7 @@ function renderObservations() {
         <small>${formatDate(obs.createdAt)}</small>
       </li>
     `).join("")
-    : emptyMessage("Aucune observation enregistrée.");
+    : emptyMessage("No observation recorded yet.");
 }
 
 function renderTasks() {
@@ -175,15 +175,15 @@ function renderTasks() {
     ? state.tasks.map((task) => `
       <li class="item">
         <strong>${task.title}</strong>
-        Responsable: ${task.assignee}
+        Assignee: ${task.assignee}
         <small>${task.priority} · ${task.status}</small>
         <div class="item-actions">
-          <button class="mini-btn" onclick="updateTaskStatus('${task.id}', 'En cours')">En cours</button>
-          <button class="mini-btn" onclick="updateTaskStatus('${task.id}', 'Terminé')">Terminé</button>
+          <button class="mini-btn" onclick="updateTaskStatus('${task.id}', 'In progress')">In progress</button>
+          <button class="mini-btn" onclick="updateTaskStatus('${task.id}', 'Done')">Done</button>
         </div>
       </li>
     `).join("")
-    : emptyMessage("Aucune tâche créée.");
+    : emptyMessage("No task created yet.");
 }
 
 function renderQuality() {
@@ -192,12 +192,12 @@ function renderQuality() {
     ? state.qualityChecks.map((check) => `
       <li class="item">
         <strong>${check.crop} - ${check.category}</strong>
-        Quantité: ${check.quantity}
-        <small>${check.notes || "Aucune note"}</small>
+        Quantity: ${check.quantity}
+        <small>${check.notes || "No notes"}</small>
         <small>${formatDate(check.createdAt)}</small>
       </li>
     `).join("")
-    : emptyMessage("Aucun contrôle qualité enregistré.");
+    : emptyMessage("No quality check recorded yet.");
 }
 
 function renderPosts() {
@@ -210,7 +210,7 @@ function renderPosts() {
         <small>${formatDate(post.createdAt)}</small>
       </li>
     `).join("")
-    : emptyMessage("Aucun message d'équipe.");
+    : emptyMessage("No team message yet.");
 }
 
 function renderAll() {

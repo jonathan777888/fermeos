@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,36 +11,36 @@
     <div>
       <p class="eyebrow">La ferme de l'avenir</p>
       <h1>Ferme OS</h1>
-      <p class="subtitle">Tableau de bord terrain pour observations, tâches, qualité et équipe.</p>
+      <p class="subtitle">A field dashboard for crop observations, tasks, quality control, and team updates.</p>
     </div>
-    <button id="seedDemoBtn" class="secondary-btn">Charger données démo</button>
+    <button id="seedDemoBtn" class="secondary-btn">Load demo data</button>
   </header>
 
-  <nav class="tabs" aria-label="Navigation principale">
+  <nav class="tabs" aria-label="Main navigation">
     <button class="tab active" data-view="dashboard">Dashboard</button>
     <button class="tab" data-view="observations">Observations</button>
-    <button class="tab" data-view="tasks">Tâches</button>
-    <button class="tab" data-view="quality">Qualité</button>
-    <button class="tab" data-view="team">Équipe</button>
+    <button class="tab" data-view="tasks">Tasks</button>
+    <button class="tab" data-view="quality">Quality</button>
+    <button class="tab" data-view="team">Team</button>
   </nav>
 
   <main>
     <section id="dashboard" class="view active-view">
       <div class="grid cards-grid">
         <article class="card metric-card">
-          <span class="metric-label">Observations urgentes</span>
+          <span class="metric-label">Urgent observations</span>
           <strong id="urgentCount">0</strong>
         </article>
         <article class="card metric-card">
-          <span class="metric-label">Tâches à faire</span>
+          <span class="metric-label">Open tasks</span>
           <strong id="todoCount">0</strong>
         </article>
         <article class="card metric-card">
-          <span class="metric-label">Contrôles qualité</span>
+          <span class="metric-label">Quality checks</span>
           <strong id="qualityCount">0</strong>
         </article>
         <article class="card metric-card">
-          <span class="metric-label">Messages équipe</span>
+          <span class="metric-label">Team messages</span>
           <strong id="postCount">0</strong>
         </article>
       </div>
@@ -48,16 +48,16 @@
       <div class="grid two-columns">
         <section class="card">
           <div class="section-title">
-            <h2>Priorité 1</h2>
-            <span class="pill danger">Terrain</span>
+            <h2>Priority 1</h2>
+            <span class="pill danger">Field</span>
           </div>
           <ul id="priorityList" class="item-list"></ul>
         </section>
 
         <section class="card">
           <div class="section-title">
-            <h2>Dernières observations</h2>
-            <span class="pill">Suivi</span>
+            <h2>Latest observations</h2>
+            <span class="pill">Tracking</span>
           </div>
           <ul id="recentObservations" class="item-list"></ul>
         </section>
@@ -67,8 +67,8 @@
     <section id="observations" class="view">
       <div class="grid two-columns">
         <form id="observationForm" class="card form-card">
-          <h2>Ajouter une observation</h2>
-          <label>Parcelle
+          <h2>Add an observation</h2>
+          <label>Parcel
             <select name="parcel" required>
               <option value="C2">C2</option>
               <option value="C4">C4</option>
@@ -76,37 +76,37 @@
               <option value="D6">D6</option>
               <option value="Tunnel">Tunnel</option>
               <option value="Grand Jardin">Grand Jardin</option>
-              <option value="Mini-serre">Mini-serre</option>
+              <option value="Mini-greenhouse">Mini-greenhouse</option>
             </select>
           </label>
-          <label>Culture
-            <input name="crop" placeholder="Ex: melon d'eau, tomate, ail" required />
+          <label>Crop
+            <input name="crop" placeholder="Ex: watermelon, tomato, garlic" required />
           </label>
-          <label>Type de problème
+          <label>Issue type
             <select name="issue" required>
-              <option value="Ravageur">Ravageur</option>
-              <option value="Maladie">Maladie</option>
-              <option value="Mauvaise herbe">Mauvaise herbe</option>
-              <option value="Stress hydrique">Stress hydrique</option>
-              <option value="Qualité">Qualité</option>
-              <option value="Autre">Autre</option>
+              <option value="Pest">Pest</option>
+              <option value="Disease">Disease</option>
+              <option value="Weeds">Weeds</option>
+              <option value="Water stress">Water stress</option>
+              <option value="Quality">Quality</option>
+              <option value="Other">Other</option>
             </select>
           </label>
-          <label>Gravité
+          <label>Severity
             <select name="severity" required>
-              <option value="Faible">Faible</option>
-              <option value="Moyen">Moyen</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
               <option value="Urgent">Urgent</option>
             </select>
           </label>
           <label>Notes
-            <textarea name="notes" placeholder="Décris ce que tu as observé..." required></textarea>
+            <textarea name="notes" placeholder="Describe what you observed..." required></textarea>
           </label>
-          <button type="submit" class="primary-btn">Enregistrer</button>
+          <button type="submit" class="primary-btn">Save observation</button>
         </form>
 
         <section class="card">
-          <h2>Liste des observations</h2>
+          <h2>Observation list</h2>
           <ul id="observationList" class="item-list"></ul>
         </section>
       </div>
@@ -115,32 +115,32 @@
     <section id="tasks" class="view">
       <div class="grid two-columns">
         <form id="taskForm" class="card form-card">
-          <h2>Créer une tâche</h2>
-          <label>Titre
-            <input name="title" placeholder="Ex: Reboucher les trous de couverture" required />
+          <h2>Create a task</h2>
+          <label>Title
+            <input name="title" placeholder="Ex: Patch holes in the watermelon cover" required />
           </label>
-          <label>Responsable
+          <label>Assignee
             <input name="assignee" placeholder="Ex: Jonathan" required />
           </label>
-          <label>Priorité
+          <label>Priority
             <select name="priority" required>
-              <option value="Priorité 1">Priorité 1</option>
-              <option value="Priorité 2">Priorité 2</option>
-              <option value="Priorité 3">Priorité 3</option>
+              <option value="Priority 1">Priority 1</option>
+              <option value="Priority 2">Priority 2</option>
+              <option value="Priority 3">Priority 3</option>
             </select>
           </label>
-          <label>Statut
+          <label>Status
             <select name="status" required>
-              <option value="À faire">À faire</option>
-              <option value="En cours">En cours</option>
-              <option value="Terminé">Terminé</option>
+              <option value="To do">To do</option>
+              <option value="In progress">In progress</option>
+              <option value="Done">Done</option>
             </select>
           </label>
-          <button type="submit" class="primary-btn">Ajouter la tâche</button>
+          <button type="submit" class="primary-btn">Add task</button>
         </form>
 
         <section class="card">
-          <h2>Tâches</h2>
+          <h2>Tasks</h2>
           <ul id="taskList" class="item-list"></ul>
         </section>
       </div>
@@ -149,29 +149,29 @@
     <section id="quality" class="view">
       <div class="grid two-columns">
         <form id="qualityForm" class="card form-card">
-          <h2>Contrôle qualité</h2>
-          <label>Culture
-            <input name="crop" placeholder="Ex: laitue" required />
+          <h2>Quality control</h2>
+          <label>Crop
+            <input name="crop" placeholder="Ex: lettuce" required />
           </label>
-          <label>Catégorie
+          <label>Category
             <select name="category" required>
-              <option value="Vendable">Vendable</option>
-              <option value="Déclassé">Déclassé</option>
-              <option value="Don">Don</option>
-              <option value="Perte">Perte</option>
+              <option value="Sellable">Sellable</option>
+              <option value="Downgraded">Downgraded</option>
+              <option value="Donation">Donation</option>
+              <option value="Loss">Loss</option>
             </select>
           </label>
-          <label>Quantité
+          <label>Quantity
             <input name="quantity" type="number" min="0" placeholder="Ex: 12" required />
           </label>
           <label>Notes
-            <textarea name="notes" placeholder="Ex: feuilles abîmées, calibre trop petit..."></textarea>
+            <textarea name="notes" placeholder="Ex: damaged leaves, too small, cosmetic defect..."></textarea>
           </label>
-          <button type="submit" class="primary-btn">Enregistrer qualité</button>
+          <button type="submit" class="primary-btn">Save quality check</button>
         </form>
 
         <section class="card">
-          <h2>Historique qualité</h2>
+          <h2>Quality history</h2>
           <ul id="qualityList" class="item-list"></ul>
         </section>
       </div>
@@ -180,18 +180,18 @@
     <section id="team" class="view">
       <div class="grid two-columns">
         <form id="postForm" class="card form-card">
-          <h2>Message équipe</h2>
-          <label>Auteur
+          <h2>Team message</h2>
+          <label>Author
             <input name="author" placeholder="Ex: Jonathan" required />
           </label>
           <label>Message
-            <textarea name="message" placeholder="Ex: Les melons sont bien protégés, seulement reboucher les trous." required></textarea>
+            <textarea name="message" placeholder="Ex: Watermelons are well protected. We only need to patch the cover holes." required></textarea>
           </label>
-          <button type="submit" class="primary-btn">Publier</button>
+          <button type="submit" class="primary-btn">Publish</button>
         </form>
 
         <section class="card">
-          <h2>Fil d'équipe</h2>
+          <h2>Team feed</h2>
           <ul id="postList" class="item-list"></ul>
         </section>
       </div>
@@ -199,7 +199,7 @@
   </main>
 
   <footer>
-    <p>Ferme OS MVP - construit pour GitHub Pages, Bubble Challenge et portfolio remote.</p>
+    <p>Ferme OS MVP - built for GitHub Pages, Bubble Challenge, and a remote-work portfolio.</p>
   </footer>
 
   <script src="app.js"></script>
